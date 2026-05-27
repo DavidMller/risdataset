@@ -1,28 +1,27 @@
-Locations x y z:
-
-NWU frame
-
-Scenario i:
-
-Tx: (-1.36, 0, 0.7)	Rx: (1.34, 0, 0.7)	RIS: (0, 0, 2)
-
-Scenario ii:
-
-Tx: (-1.36, 0, 0.66)	Rx: (1.55, 0, 0.75)	RIS: (1.2, 0, 2)
-
-Scenario iii:
-
-Tx: (-1.55, 0.75, 0.7)	Rx: (1.65, 0.77, 0.69)	RIS: (0, 0, 2)
+All attitude and position information are provided in the NWU frame.
+All experiments are conducted in a flight lab under the same environmental conditions.
+We consider three scenarios with varying Tx, Rx, and UAV-mounted RIS locations to capture both optimal and non ideal relative geometries.
+This accounts for practical deployment conditions, where a UAV-mounted RIS cannot always be positioned optimally with respect to the Tx and Rx.
+We are treating hover flight in all scenarios, i.e. the UAV is commanded to maintain a fixed target position using guided mode\footnote{https://ardupilot.org/copter/docs/ac2\_guidedmode.html}.
+We restart the UAV and calibrate the IMUs on the flight controller before every flight to ensure the same initial conditions.
+In the first scenario (i), the UAV-mounted RIS is positioned at the midpoint of the direct link between Tx and Rx.
+The target position of the UAV-mounted RIS is set to $(0,0,2)$. The Tx and Rx are located at $(-1.36,0,0.7)$ and $(1.34,0,0.7)$, respectively.
+In the second scenario (ii), the UAV-mounted RIS is positioned directly above the Rx, with the target position set to $(1.2,0,2)$. The Tx and Rx are located at $(-1.36,0,0.66)$ and $(1.55,0,0.75)$, respectively.
+In the third scenario (iii) the UAV-mounted RIS is not deployed along the direct path between Tx and Rx.
+Similar to scenario (i), the target position of the UAV-mounted RIS is set to $(0,0,2)$. The Tx and Rx are positioned at $(-1.55,0.75,0.7)$ and $(1.65,0.77,0.69)$, respectively.
+In each scenario, the Tx and Rx are oriented towards the target position of the UAV-mounted RIS.
+All scenarios are schematically illustrated in Fig.~\ref{fig:scenarios}.
 
 ------------------------------------------------------------------------------
 
-RIS configurations:
-
-Active RIS: The RIS is continuously updated to maintain the optimal configuration based on the latest UAV EKF estimates
-
-Static RIS: The RIS configuration is optimized once prior to flight for the respective target position. The configuration is then kept throughout the entire flight. 
-
-Off RIS: The RIS is turned off, i.e. no element induces a phase shift, throughout the entire flight.
+We measure the performance of the UAV-mounted RIS for three different RIS configurations in each scenario.
+For each configuration, two flights are conducted, resulting in a total of six flights per scenario.
+The first RIS configuration is obtained by continuously updating the RIS according to the optimal phase profile, computed based on the most recent UAV's EKF estimate using the optimization in Sec.~\ref{sec:OPtimization}.
+The update is performed at the RIS frequency of \SI{50}{\hertz}.
+The second configuration is determined by solving \eqref{eq:optProblem} once prior to flight for the respective target position.
+The RIS configuration is then kept constant throughout the entire flight.
+For the third configuration, the RIS is deactivated, i.e., no phase shifts are applied to the reflecting elements.
+This effectively corresponds to a passive metallic reflector.
 
 Configurations are given as a binary vector. // Leave space for adding Information About vector to Hardware mapping
 
