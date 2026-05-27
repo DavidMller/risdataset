@@ -52,6 +52,55 @@ Attitudes are represented using XYZ roll-pitch-yaw Euler angles in radians.
 
 ---
 
+## Dataset Structure
+
+The dataset is organized hierarchically: **Scenario → RIS Configuration → Flight**.
+
+```
+risdataset/
+├── Scenario_i/
+│   ├── ActiveRIS/
+│   │   ├── Flight1/
+│   │   └── Flight2/
+│   ├── StaticRIS/
+│   │   ├── Flight1/
+│   │   └── Flight2/
+│   └── OffRIS/
+│       ├── Flight1/
+│       │    └──<filename>.csv
+│       └── Flight2/
+│            └──<filename>.csv
+├── Scenario_ii/   (same structure)
+├── Scenario_iii/  (same structure)
+└── imgs/
+```
+
+Each file contains **10 seconds** of timestamped, synchronized measurement data in `.csv` format at a frequency of 50 Hertz. All units are specified in the respective file headers and summarized in the following table:
+
+| Column | Unit | Description |
+|---|---|---|
+| Timestamp | ns | UNIX timestamp |
+| UAV Position: x | m | UAV EKF position in NWU frame |
+| UAV Position: y | m | UAV EKF position in NWU frame |
+| UAV Position: z | m | UAV EKF position in NWU frame |
+| UAV Attitude: roll | rad | UAV roll angle |
+| UAV Attitude: pitch | rad | UAV pitch angle |
+| UAV Attitude: yaw | rad | UAV yaw angle |
+| RIS Position: x | m | Estimated RIS position in NWU frame |
+| RIS Position: y | m | Estimated RIS position in NWU frame |
+| RIS Position: z | m | Estimated RIS position in NWU frame |
+| RIS Attitude: roll | rad | Estimated RIS roll angle |
+| RIS Attitude: pitch | rad | Estimated RIS pitch angle |
+| RIS Attitude: yaw | rad | Estimated RIS yaw angle |
+| RIS configuration | binary vector | Current RIS phase profile |
+| S21 Magnitude | dB | Measured channel magnitude |
+
+RIS configurations are stored as **binary row vectors** (one entry per element). Each entry corresponds to the phase state of one RIS element (0 or 1, encoding a 0° or 180° phase shift).
+
+The mapping between vector and RIS patch is as follows:
+
+---
+
 ## Experimental Setup
 
 ### RIS Prototype
@@ -104,8 +153,6 @@ Three deployment scenarios are considered to cover both optimal and non-ideal re
 
 In each scenario, Tx and Rx are oriented towards the target position of the UAV-mounted RIS.
 
----
-
 ## RIS Configurations
 
 For each scenario, three RIS configurations are evaluated with **two flights per configuration** (6 flights per scenario, 18 flights total):
@@ -116,45 +163,3 @@ For each scenario, three RIS configurations are evaluated with **two flights per
 | Static (pre-computed) | `StaticRIS` | RIS phase profile optimized once prior to flight for the target position, then kept constant |
 | Off (passive) | `OffRIS` | No phase shifts applied — equivalent to a passive metallic reflector |
 
-RIS configurations are stored as **binary row vectors** (one entry per element). Each entry corresponds to the phase state of one RIS element (0 or 1, encoding a 0° or 180° phase shift).
-
-The mapping between vector and RIS patch is as follows:
-
----
-
-## Dataset Structure
-
-The dataset is organized hierarchically: **Scenario → RIS Configuration → Flight**.
-
-```
-risdataset/
-├── Scenario_i/
-│   ├── ActiveRIS/
-│   │   ├── Flight1/
-│   │   └── Flight2/
-│   ├── StaticRIS/
-│   │   ├── Flight1/
-│   │   └── Flight2/
-│   └── OffRIS/
-│       ├── Flight1/
-│       │    └──<filename>.csv
-│       └── Flight2/
-│            └──<filename>.csv
-├── Scenario_ii/   (same structure)
-├── Scenario_iii/  (same structure)
-└── imgs/
-```
-
-Each file contains **10 seconds** of timestamped, synchronized measurement data in `.csv` format at a frequency of 50 Hertz. All units are specified in the respective file headers and summarized in the following table:
-
-| Column | Unit | Description |
-|---|---|---|
-| Timestamp | ns | UNIX timestamp |
-| UAV Position: x | m | UAV EKF position in NWU frame |
-| UAV Position: y | m | UAV EKF position in NWU frame |
-| UAV Position: z | m | UAV EKF position in NWU frame |
-| UAV Attitude: roll | rad | UAV roll angle |
-| UAV Attitude: pitch | rad | UAV pitch angle |
-| UAV Attitude: yaw | rad | UAV yaw angle |
-| RIS configuration | binary vector | Current RIS phase profile |
-| S21 Magnitude | dB | Measured channel magnitude |
