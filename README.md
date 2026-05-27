@@ -145,20 +145,16 @@ risdataset/
 └── imgs/
 ```
 
-Each file contains **10 seconds** of timestamped, synchronized measurement data in `.csv` format at a frequency of 50 Hertz. All units are specified in the respective file headers.
-
-## CSV File Contents
-
-Each CSV file contains synchronized measurements sampled at 50 Hz.
+Each file contains **10 seconds** of timestamped, synchronized measurement data in `.csv` format at a frequency of 50 Hertz. All units are specified in the respective file headers and summarized in the following table:
 
 | Column | Unit | Description |
 |---|---|---|
-| timestamp_ns | ns | UNIX timestamp |
-| uav_pos_x | m | UAV EKF position in NWU frame |
-| uav_pos_y | m | UAV EKF position in NWU frame |
-| uav_pos_z | m | UAV EKF position in NWU frame |
-| uav_roll | rad | UAV roll angle |
-| ... | ... | ... |
-| ris_config | binary vector | Current RIS phase profile |
-| s21_db | dB | Measured channel magnitude |
-| s21_phase | deg | Measured channel phase |
+| Timestamp | ns | UNIX timestamp |
+| UAV Position: x | m | UAV EKF position in NWU frame |
+| UAV Position: y | m | UAV EKF position in NWU frame |
+| UAV Position: z | m | UAV EKF position in NWU frame |
+| UAV Attitude: roll | rad | UAV roll angle |
+| UAV Attitude: pitch | rad | UAV pitch angle |
+| UAV Attitude: yaw | rad | UAV yaw angle |
+| RIS configuration | binary vector | Current RIS phase profile |
+| S21 Magnitude | dB | Measured channel magnitude |
