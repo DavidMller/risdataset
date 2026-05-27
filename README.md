@@ -1,6 +1,34 @@
-# UAV-Mounted RIS Dataset
+# LIVE-RIS: The UAV-mounted RIS dataset
 
-This repository contains a scientific measurement dataset collected during indoor flight experiments with a **UAV-mounted Reconfigurable Intelligent Surface (RIS)**. The dataset captures pose estimates, RIS configurations, and wireless channel measurements across three spatial deployment scenarios and three RIS operating modes, with two repeated flights each.
+This repository contains a measurement dataset collected during indoor flight experiments with a **UAV-mounted Reconfigurable Intelligent Surface (RIS)**. extensive measurement campaign.
+The dataset comprises EKF-based state estimates of both UAV and RIS, ground-truth measurements, RIS configurations derived via optimization, and the corresponding S21 channel measurements acquired using a vector network analyzer (VNA). In addition, we consider multiple transmitter (Tx), receiver (Rx), and UAV-mounted RIS deployment locations, enabling analysis of divers relative geometries.
+
+---
+
+## License
+
+Any use of the dataset which results in an academic publication or other publication must include a citation of our paper:
+
+D. Müller, K. Weinberger, A. Sezgin and M. Mönnigmann, "LIVE-RIS: The UAV-mounted RIS Dataset," 2027 IEEE ...
+
+```
+@INPROCEEDINGS{9839223, 
+author={},
+booktitle={},
+title={},
+year={2027},
+volume={},  
+number={},
+pages={},
+doi={}}
+```
+
+---
+
+## Contact
+
+[David Müller](https://lrs.ruhr-uni-bochum.de/en/team/david-muller/)                 <david.mueller-r21@ruhr-uni-bochum.de>
+[Kevin Weinberger](https://www.dks.ruhr-uni-bochum.de/en/profiles/kevin-weinberger/) <evin.weinberger@ruhr-uni-bochum.de>
 
 ---
 
@@ -10,27 +38,13 @@ Reconfigurable Intelligent Surfaces (RIS) are a promising technology for enhanci
 
 All attitude and position information are provided in the **NWU (North-West-Up) frame**. All experiments were conducted in a flight lab under identical environmental conditions.
 
-<p align="center">
-  <img src="imgs/Dataset_Scenarios1.svg" alt="Experimental Scenarios" width="80%"/>
-  <br><em>Figure 1: Schematic illustration of the three experimental scenarios.</em>
-</p>
-
 ---
 
 ## Experimental Setup
 
-### UAV Platform — Holybro X500
-
-The UAV carrying the RIS is a customized **Holybro X500 Quadcopter** (rotor-to-rotor diameter: 500 mm), capable of carrying up to 1 kg of payload. The flight controller runs **ArduPilot V4.6.3** and features three IMUs (ICM20602 primary, ICM20948 secondary, and a third on-board unit) for redundancy and lane-switching.
-
-Since experiments are conducted indoors (no GNSS available), a **Motion Capture System (MCS)** provides position ground truth at 5 Hz, substituting GNSS, barometer, and magnetometer inputs to the Extended Kalman Filter (EKF). An ESP8266 microcontroller running MAVESP8266 firmware relays MCS data to the flight controller wirelessly.
-
-<p align="center">
-  <img src="imgs/UAVSetup6.svg" alt="UAV and RIS Setup" width="75%"/>
-  <br><em>Figure 2: Left: RIS prototype and its dimensions. Right: RIS prototype mounted to the customized Holybro X500. Orange dots represent the origin of the UAV body frame (top) and the center of the RIS (bottom).</em>
-</p>
-
 ### RIS Prototype
+
+The **RIS prototype** used for measurements has dimensions of 20 × 16 cm and consists of M = 120 elements arranged in a 10 × 12 array. We use a Raspberry Pi 4B as the RIS controller, which is connected to the RIS via a serial port with a baud rate of 115200 Bd. The key specifications of the prototype are summarized in the following table:
 
 | Parameter | Value |
 |---|---|
@@ -40,24 +54,35 @@ Since experiments are conducted indoors (no GNSS available), a **Motion Capture 
 | Carrier frequency | 5.385 GHz |
 | Phase-shift attenuation | 3 dB |
 | Max. reconfiguration rate | 50 Hz |
-| RIS controller | Raspberry Pi 4B (serial, 115200 Bd) |
 
-The RIS is mounted underneath the UAV; its center is located **265 mm below the UAV body frame origin**, with no lateral offset.
+### UAV Platform — Customized Holybro X500
+
+The UAV carrying the RIS is a customized **Holybro X500 Quadcopter** (rotor-to-rotor diameter: 500 mm), capable of carrying up to 1 kg of payload. The flight controller runs **ArduPilot V4.6.3** and features three IMUs (ICM20602, ICM20948, ICM20649) for redundancy and lane-switching.
+
+Since experiments are conducted indoors (no GNSS available), a **Motion Capture System (MCS)** provides position measurements at 5 Hz, substituting GNSS, barometer, and magnetometer inputs to the Extended Kalman Filter (EKF). An ESP8266 microcontroller running MAVESP8266 firmware relays MCS data to the flight controller wirelessly.
+
+The RIS is mounted under the UAV, where its center is located 265 mm underneath the origin of the UAV's body frame, with no offsets in the x-y-plane.
+The Raspberry Pi is mounted on top of the UAV, with almost no vertical offset, and no offsets in the x-y-plane.
+
+<p align="center">
+  <img src="imgs/UAVSetup6.svg" alt="UAV and RIS Setup" width="75%"/>
+  <br><em>Figure 2: Left: RIS prototype and its dimensions. Right: RIS prototype mounted to the customized Holybro X500. Orange dots represent the origin of the UAV body frame (top) and the center of the RIS (bottom).</em>
+</p>
 
 ### Vector Network Analyzer (VNA)
 
-Wireless channel performance is measured using a **Keysight P5026B VNA** with the S9010B software option, enabling time-gated S-parameter measurements to validate RIS performance during flight.
+Wireless channel performance is measured using a **Keysight P5026B VNA** with the S9010B software option, which enables time-gating to isolate the signal component only reflected by the RIS. Two VNA ports serve as the transmitter and receiver, respectively, and are each connected to a directional horn antenna of type LB-187-15-C-SF (A-Info). Within the considered frequency range, the antenna gain is at least 16.35 dBi. The measurements are conducted in \SI{50}{\hertz} intervals.
 
 <p align="center">
   <img src="imgs/Dataset_Experiments1.svg" alt="Experimental Setup" width="80%"/>
-  <br><em>Figure 3: Experimental setup for scenario (iii). Inset shows the placement of the motion capture cameras.</em>
+  <br><em>Figure 3: Experimental setup. Inset shows the placement of the motion capture cameras.</em>
 </p>
 
 ---
 
 ## Scenarios
 
-Three deployment scenarios are considered to cover both optimal and non-ideal relative geometries between Tx, Rx, and the UAV-mounted RIS. The UAV hovers at a fixed target position (guided mode) in all scenarios. IMUs are recalibrated before every flight.
+Three deployment scenarios are considered to cover both optimal and non-ideal relative geometries between Tx, Rx, and the UAV-mounted RIS. The UAV hovers at a fixed target position in all scenarios. The scenarios key features are summarized in the following table:
 
 | Scenario | UAV-RIS Target Position | Tx Position | Rx Position | Description |
 |---|---|---|---|---|
@@ -81,6 +106,8 @@ For each scenario, three RIS configurations are evaluated with **two flights per
 
 RIS configurations are stored as **binary row vectors** (one entry per element). Each entry corresponds to the phase state of one RIS element (0 or 1, encoding a 0° or 180° phase shift).
 
+The mapping between vector and RIS patch is as follows:
+
 ---
 
 ## Dataset Structure
@@ -98,79 +125,12 @@ risdataset/
 │   │   └── Flight2/
 │   └── OffRIS/
 │       ├── Flight1/
+│       │    └──<filename>.csv
 │       └── Flight2/
+│            └──<filename>.csv
 ├── Scenario_ii/   (same structure)
 ├── Scenario_iii/  (same structure)
 └── imgs/
 ```
 
-<p align="center">
-  <img src="imgs/Structure2.svg" alt="Dataset File Hierarchy" width="60%"/>
-  <br><em>Figure 4: Dataset file hierarchy.</em>
-</p>
-
-Each flight folder contains **10 seconds** of timestamped, synchronized measurement data in `.csv` format. All timestamps and units are specified in the respective file headers.
-
-### File Naming Convention
-
-Files follow the pattern:
-
-```
-Scenario_{scenario}_{RISconfig}_{source}_{datatype}_Flight{N}.csv
-```
-
-| Field | Possible Values | Description |
-|---|---|---|
-| `{scenario}` | `i`, `ii`, `iii` | Experimental scenario |
-| `{RISconfig}` | `ActiveRIS`, `StaticRIS`, `OffRIS` | RIS configuration |
-| `{source}` | `EKF`, `MCS`, `VNA` | Data source |
-| `{datatype}` | `RISPose`, `UAVPose`, `Config`, `Magnitudes` | Type of recorded data |
-| `{N}` | `1`, `2` | Flight repetition number |
-
-**Example:** `Scenario_iii_StaticRIS_EKF_RISPose_Flight1.csv` — EKF-estimated RIS pose (position + attitude) from scenario (iii) with static RIS configuration, first flight.
-
-### File Types per Flight
-
-| File | Source | Contents |
-|---|---|---|
-| `*_EKF_RISPose_*` | EKF | Estimated RIS position and attitude (derived from UAV EKF estimate) |
-| `*_EKF_UAVPose_*` | EKF | Estimated UAV position and attitude |
-| `*_MCS_RISPose_*` | MCS | Ground-truth RIS position and attitude |
-| `*_MCS_UAVPose_*` | MCS | Ground-truth UAV position and attitude |
-| `*_EKF_Config_*` | EKF | RIS configuration (binary vector) at each timestep |
-| `*_VNA_Magnitudes_*` | VNA | Measured S-parameter magnitudes (wireless channel) |
-
-> **Note:** Both EKF estimates and MCS ground-truth measurements are included for UAV and RIS pose to facilitate reproducibility and error analysis.
-
----
-
-## Coordinate Frame
-
-All position and attitude data are provided in the **NWU (North-West-Up)** frame.
-
----
-
-## Hardware Summary
-
-| Component | Model / Details |
-|---|---|
-| UAV | Holybro X500 (customized) |
-| Flight Controller | Cube Orange (ArduPilot V4.6.3) |
-| Primary IMU | ICM20602 |
-| Secondary IMU | ICM20948 |
-| RIS Controller | Raspberry Pi 4B |
-| Motion Capture System | Indoor MCS (5 Hz position + attitude) |
-| VNA | Keysight P5026B + S9010B option |
-| WiFi Bridge | ESP8266 + MAVESP8266 firmware |
-
----
-
-## Citation
-
-If you use this dataset in your work, please cite the associated publication (to be added).
-
----
-
-## License
-
-To be added.
+Each file contains **10 seconds** of timestamped, synchronized measurement data in `.csv` format at a frequency of 50 Hertz. All units are specified in the respective file headers.
