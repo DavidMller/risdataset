@@ -71,8 +71,7 @@ risdataset/
 │       └── Flight2/
 │            └──<filename>.csv
 ├── Scenario_ii/   (same structure)
-├── Scenario_iii/  (same structure)
-└── imgs/
+└── Scenario_iii/  (same structure)
 ```
 
 Each file contains **10 seconds** of timestamped, synchronized measurement data in `.csv` format at a frequency of 50 Hertz. All units are specified in the respective file headers and summarized in the following table:
