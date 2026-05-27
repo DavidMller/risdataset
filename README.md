@@ -1,7 +1,17 @@
 # LIVE-RIS: The UAV-mounted RIS dataset
 
-This repository contains a measurement dataset collected during indoor flight experiments with a **UAV-mounted Reconfigurable Intelligent Surface (RIS)**. extensive measurement campaign.
+This repository contains a measurement dataset collected during indoor flight experiments with a **UAV-mounted Reconfigurable Intelligent Surface (RIS)**.
 The dataset comprises EKF-based state estimates of both UAV and RIS, ground-truth measurements, RIS configurations derived via optimization, and the corresponding S21 channel measurements acquired using a vector network analyzer (VNA). In addition, we consider multiple transmitter (Tx), receiver (Rx), and UAV-mounted RIS deployment locations, enabling analysis of divers relative geometries.
+
+This README provides an overview of the system configuration, hardware specifications, and conducted measurement campaigns included in this dataset. For a detailed description of the methodology, experimental setup, calibration procedures, and evaluation results, readers are referred to the associated publication.
+
+---
+
+## Contact
+
+[David Müller](https://lrs.ruhr-uni-bochum.de/en/team/david-muller/)                 <david.mueller-r21@ruhr-uni-bochum.de>
+
+[Kevin Weinberger](https://www.dks.ruhr-uni-bochum.de/en/profiles/kevin-weinberger/) <evin.weinberger@ruhr-uni-bochum.de>
 
 ---
 
@@ -23,20 +33,22 @@ pages={},
 doi={}}
 ```
 
----
-
-## Contact
-
-[David Müller](https://lrs.ruhr-uni-bochum.de/en/team/david-muller/)                 <david.mueller-r21@ruhr-uni-bochum.de>
-[Kevin Weinberger](https://www.dks.ruhr-uni-bochum.de/en/profiles/kevin-weinberger/) <evin.weinberger@ruhr-uni-bochum.de>
+This dataset is released for non-commercial research and educational purposes.
 
 ---
 
 ## Overview
 
-Reconfigurable Intelligent Surfaces (RIS) are a promising technology for enhancing wireless communication by dynamically controlling the phase of reflected signals. This dataset investigates the performance of a UAV-mounted RIS acting as an airborne relay between a transmitter (Tx) and receiver (Rx) in an indoor laboratory environment.
+Reconfigurable Intelligent Surfaces (RIS) are a promising technology for enhancing wireless communication by dynamically controlling the phase of reflected signals. This dataset investigates the performance of a UAV-mounted RIS acting as an airborne relay between a transmitter (Tx) and receiver (Rx).
 
-All attitude and position information are provided in the **NWU (North-West-Up) frame**. All experiments were conducted in a flight lab under identical environmental conditions.
+All experiments were conducted in a flight lab under identical environmental conditions.
+
+The NWU frame is defined as:
+- x-axis: North
+- y-axis: West
+- z-axis: Up
+
+Attitudes are represented using XYZ roll-pitch-yaw Euler angles in radians.
 
 ---
 
@@ -71,7 +83,7 @@ The Raspberry Pi is mounted on top of the UAV, with almost no vertical offset, a
 
 ### Vector Network Analyzer (VNA)
 
-Wireless channel performance is measured using a **Keysight P5026B VNA** with the S9010B software option, which enables time-gating to isolate the signal component only reflected by the RIS. Two VNA ports serve as the transmitter and receiver, respectively, and are each connected to a directional horn antenna of type LB-187-15-C-SF (A-Info). Within the considered frequency range, the antenna gain is at least 16.35 dBi. The measurements are conducted in \SI{50}{\hertz} intervals.
+Wireless channel performance is measured using a **Keysight P5026B VNA** with the S9010B software option, which enables time-gating to isolate the signal component only reflected by the RIS. Two VNA ports serve as the transmitter and receiver, respectively, and are each connected to a directional horn antenna of type LB-187-15-C-SF (A-Info). Within the considered frequency range, the antenna gain is at least 16.35 dBi. The measurements are conducted in 50 Hertz intervals.
 
 <p align="center">
   <img src="imgs/Dataset_Experiments1.svg" alt="Experimental Setup" width="80%"/>
@@ -90,7 +102,7 @@ Three deployment scenarios are considered to cover both optimal and non-ideal re
 | (ii) | (1.2, 0, 2) m | (−1.36, 0, 0.66) m | (1.55, 0, 0.75) m | RIS directly above Rx |
 | (iii) | (0, 0, 2) m | (−1.55, 0.75, 0.7) m | (1.65, 0.77, 0.69) m | RIS not along the direct Tx–Rx path (non-ideal geometry) |
 
-In each scenario, Tx and Rx are oriented towards the UAV-RIS target position.
+In each scenario, Tx and Rx are oriented towards the target position of the UAV-mounted RIS.
 
 ---
 
@@ -134,3 +146,19 @@ risdataset/
 ```
 
 Each file contains **10 seconds** of timestamped, synchronized measurement data in `.csv` format at a frequency of 50 Hertz. All units are specified in the respective file headers.
+
+## CSV File Contents
+
+Each CSV file contains synchronized measurements sampled at 50 Hz.
+
+| Column | Unit | Description |
+|---|---|---|
+| timestamp_ns | ns | UNIX timestamp |
+| uav_pos_x | m | UAV EKF position in NWU frame |
+| uav_pos_y | m | UAV EKF position in NWU frame |
+| uav_pos_z | m | UAV EKF position in NWU frame |
+| uav_roll | rad | UAV roll angle |
+| ... | ... | ... |
+| ris_config | binary vector | Current RIS phase profile |
+| s21_db | dB | Measured channel magnitude |
+| s21_phase | deg | Measured channel phase |
