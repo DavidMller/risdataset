@@ -154,7 +154,7 @@ In each scenario, Tx and Rx are oriented towards the target position of the UAV-
 
 ## RIS Configurations
 
-For each scenario, three RIS configurations are evaluated with **two flights per configuration** (6 flights per scenario, 18 flights total):
+For each scenario, three RIS configurations are evaluated with **two flights per optimization approach** (6 flights per scenario, 18 flights total):
 
 | Configuration | Label | Description |
 |---|---|---|
