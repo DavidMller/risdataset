@@ -117,7 +117,7 @@ The **RIS prototype** used for measurements has dimensions of 20 × 16 cm and co
 
 ### UAV Platform — Customized Holybro X500
 
-The UAV carrying the RIS is a customized **Holybro X500 Quadcopter** (rotor-to-rotor diameter: 500 mm), capable of carrying up to 1 kg of payload. The flight controller runs **ArduPilot V4.6.3** and features three IMUs (ICM20602, ICM20948, ICM20649) for redundancy and lane-switching.
+The UAV carrying the RIS is a customized **Holybro X500 Quadcopter** (rotor-to-rotor diameter: 500 mm), capable of carrying up to 1 kg of payload. The flight controller runs **ArduPilot V4.6.3** and features three IMUs (ICM20602, ICM20948, ICM20649) for redundancy.
 
 Since experiments are conducted indoors (no GNSS available), a **Motion Capture System (MCS)** provides position measurements at 5 Hz, substituting GNSS, barometer, and magnetometer inputs to the Extended Kalman Filter (EKF). An ESP8266 microcontroller running MAVESP8266 firmware relays MCS data to the flight controller wirelessly.
 
