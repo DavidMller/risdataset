@@ -11,7 +11,7 @@ This README provides an overview of the system configuration, hardware specifica
 
 [David Müller](https://lrs.ruhr-uni-bochum.de/en/team/david-muller/)                 <david.mueller-r21@ruhr-uni-bochum.de>
 
-[Kevin Weinberger](https://www.dks.ruhr-uni-bochum.de/en/profiles/kevin-weinberger/) <evin.weinberger@ruhr-uni-bochum.de>
+[Kevin Weinberger](https://www.dks.ruhr-uni-bochum.de/en/profiles/kevin-weinberger/) <kevin.weinberger@ruhr-uni-bochum.de>
 
 ---
 
@@ -59,13 +59,13 @@ The dataset is organized hierarchically: **Scenario → RIS Configuration → Fl
 ```
 risdataset/
 ├── Scenario_i/
-│   ├── DynamicRIS_a/
+│   ├── a_DynamicRIS/
 │   │   ├── Flight1/
 │   │   └── Flight2/
-│   ├── StaticRIS_b/
+│   ├── b_StaticRIS/
 │   │   ├── Flight1/
 │   │   └── Flight2/
-│   └── OffRIS_c/
+│   └── c_OffRIS/
 │       ├── Flight1/
 │       │    └──<filename>.csv
 │       └── Flight2/
@@ -158,7 +158,7 @@ For each scenario, three RIS configurations are evaluated with **two flights per
 
 | Configuration | Label | Description |
 |---|---|---|
-| Dynamic (a) | `DynamicRIS` | RIS phase profile continuously updated at 50 Hz based on the UAV's current EKF position estimate |
-| Static; pre-computed (b) | `StaticRIS` | RIS phase profile optimized once prior to flight for the target position, then kept constant |
-| Off; passive (c) | `OffRIS` | No phase shifts applied — equivalent to a passive metallic reflector |
+| (a) Dynamic | `DynamicRIS` | RIS phase profile continuously updated at 50 Hz based on the UAV's current EKF position estimate |
+| (b) Static - pre-computed | `StaticRIS` | RIS phase profile optimized once prior to flight for the target position, then kept constant |
+| (c) Off - passive | `OffRIS` | No phase shifts applied — equivalent to a passive metallic reflector |
 
