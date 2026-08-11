@@ -158,7 +158,7 @@ For each scenario, three RIS configurations are evaluated with **two flights per
 
 | Configuration | Label | Description |
 |---|---|---|
-| Active (dynamic) | `ActiveRIS` | RIS phase profile continuously updated at 50 Hz based on the UAV's current EKF position estimate |
-| Static (pre-computed) | `StaticRIS` | RIS phase profile optimized once prior to flight for the target position, then kept constant |
-| Off (passive) | `OffRIS` | No phase shifts applied — equivalent to a passive metallic reflector |
+| Dynamic (a) | `DynamicRIS` | RIS phase profile continuously updated at 50 Hz based on the UAV's current EKF position estimate |
+| Static; pre-computed (b) | `StaticRIS` | RIS phase profile optimized once prior to flight for the target position, then kept constant |
+| Off; passive (c) | `OffRIS` | No phase shifts applied — equivalent to a passive metallic reflector |
 
