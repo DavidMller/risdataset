@@ -59,13 +59,13 @@ The dataset is organized hierarchically: **Scenario → RIS Configuration → Fl
 ```
 risdataset/
 ├── Scenario_i/
-│   ├── ActiveRIS/
+│   ├── DynamicRIS_a/
 │   │   ├── Flight1/
 │   │   └── Flight2/
-│   ├── StaticRIS/
+│   ├── StaticRIS_b/
 │   │   ├── Flight1/
 │   │   └── Flight2/
-│   └── OffRIS/
+│   └── OffRIS_c/
 │       ├── Flight1/
 │       │    └──<filename>.csv
 │       └── Flight2/
