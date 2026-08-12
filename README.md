@@ -96,7 +96,7 @@ Each file contains **10 seconds** of timestamped, synchronized measurement data 
 
 RIS configurations are stored as **binary row vectors** (one entry per element). Each entry corresponds to the phase state of one RIS element (0 or 1, encoding a 0° or 180° phase shift).
 
-The mapping between the entries of the binary row vector and the corresponding RIS elements is illustrated in Fig.~\ref{fig:indexing}. More precisely, the left panel shows the RIS from the front, while the right panel shows the RIS from the UAV perspective when mounted facing downward. Both panels indicate the corresponding $x$- and $y$-axes of the utilized coordinate system. From the UAV perspective, the longer side of the RIS is aligned with the $x$-axis, and the elements are indexed column-wise from top to bottom, starting at the top-left corner.
+The mapping between the entries of the binary row vector and the corresponding RIS elements is illustrated in Figure 2. The left panel shows the RIS from the front, while the right panel shows the RIS from the UAV perspective when mounted facing downward. Both panels indicate the corresponding x- and y-axes of the utilized coordinate system. From the UAV perspective, the longer side of the RIS is aligned with the x-axis, and the elements are indexed column-wise from top to bottom, starting at the top-left corner.
 
 <p align="center">
   <img src="imgs/RIS_indexing.svg" alt="UAV and RIS Setup" width="75%"/>
