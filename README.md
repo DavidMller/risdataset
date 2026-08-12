@@ -71,7 +71,10 @@ risdataset/
 │       └── Flight2/
 │            └──<filename>.csv
 ├── Scenario_ii/   (same structure)
-└── Scenario_iii/  (same structure)
+├── Scenario_iii/  (same structure)
+│
+├──ExampleEvaluation.m
+└──ExampleEvaluation.py
 ```
 
 Each file contains **10 seconds** of timestamped, synchronized measurement data in `.csv` format at a frequency of 50 Hertz. All units are specified in the respective file headers and summarized in the following table:
@@ -102,6 +105,8 @@ The mapping between the entries of the binary row vector and the corresponding R
   <img src="imgs/RIS_indexing.svg" alt="UAV and RIS Setup" width="75%"/>
   <br><em>Figure 2: RIS indexing convention utilized in the dataset. The left panel shows the front side, while the right panel shows the top-down view of the downward-facing RIS mounted on the UAV. The illustrated coordinate system follows Figure 5.</em>
 </p>
+
+To facilitate access to the dataset, we provide example scripts for both **MATLAB** and **Python**. These scripts demonstrate how to navigate the folder structure, load the measurement data, and plot selected parts of the dataset. They can also serve as a starting point for accessing and processing the data in the respective environment.
 
 ---
 
