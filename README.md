@@ -96,7 +96,12 @@ Each file contains **10 seconds** of timestamped, synchronized measurement data 
 
 RIS configurations are stored as **binary row vectors** (one entry per element). Each entry corresponds to the phase state of one RIS element (0 or 1, encoding a 0° or 180° phase shift).
 
-The mapping between vector and RIS patch is as follows:
+The mapping between the entries of the binary row vector and the corresponding RIS elements is illustrated in Fig.~\ref{fig:indexing}. More precisely, the left panel shows the RIS from the front, while the right panel shows the RIS from the UAV perspective when mounted facing downward. Both panels indicate the corresponding $x$- and $y$-axes of the utilized coordinate system. From the UAV perspective, the longer side of the RIS is aligned with the $x$-axis, and the elements are indexed column-wise from top to bottom, starting at the top-left corner.
+
+<p align="center">
+  <img src="imgs/RIS_indexing.svg" alt="UAV and RIS Setup" width="75%"/>
+  <br><em>Figure 2: RIS indexing convention utilized in the dataset. The left panel shows the front side, while the right panel shows the top-down view of the downward-facing RIS mounted on the UAV. The illustrated coordinate system follows Figure 5.</em>
+</p>
 
 ---
 
@@ -125,8 +130,8 @@ The RIS is mounted under the UAV, where its center is located 265 mm underneath 
 The Raspberry Pi is mounted on top of the UAV, with almost no vertical offset, and no offsets in the x-y-plane.
 
 <p align="center">
-  <img src="imgs/UAVSetup6.svg" alt="UAV and RIS Setup" width="75%"/>
-  <br><em>Figure 2: Left: RIS prototype and its dimensions. Right: RIS prototype mounted to the customized Holybro X500. Orange dots represent the origin of the UAV body frame (top) and the center of the RIS (bottom).</em>
+  <img src="imgs/UAVSetup.svg" alt="UAV and RIS Setup" width="75%"/>
+  <br><em>Figure 3: Left: RIS prototype and its dimensions. Right: RIS prototype mounted to the customized Holybro X500. Orange dots represent the origin of the UAV body frame (top) and the center of the RIS (bottom).</em>
 </p>
 
 ### Vector Network Analyzer (VNA)
@@ -134,8 +139,8 @@ The Raspberry Pi is mounted on top of the UAV, with almost no vertical offset, a
 Wireless channel performance is measured using a **Keysight P5026B VNA** with the S9010B software option, which enables time-gating to isolate the signal component only reflected by the RIS. Two VNA ports serve as the transmitter and receiver, respectively, and are each connected to a directional horn antenna of type LB-187-15-C-SF (A-Info). Within the considered frequency range, the antenna gain is at least 16.35 dBi. The measurements are conducted in 50 Hertz intervals.
 
 <p align="center">
-  <img src="imgs/Dataset_Experiments1.svg" alt="Experimental Setup" width="80%"/>
-  <br><em>Figure 3: Experimental setup. Inset shows the placement of the motion capture cameras.</em>
+  <img src="imgs/Dataset_Experiments.svg" alt="Experimental Setup" width="80%"/>
+  <br><em>Figure 4: Experimental setup. Inset shows the placement of the motion capture cameras.</em>
 </p>
 
 ---
@@ -151,6 +156,11 @@ Three deployment scenarios are considered to cover both optimal and non-ideal re
 | (iii) | (0, 0, 2) m | (−1.55, 0.75, 0.7) m | (1.65, 0.77, 0.69) m | RIS not along the direct Tx–Rx path (non-ideal geometry) |
 
 In each scenario, Tx and Rx are oriented towards the target position of the UAV-mounted RIS.
+
+<p align="center">
+  <img src="imgs/Dataset_Scenarios.svg" alt="Experimental Setup" width="80%"/>
+  <br><em>Figure 5: Schematic representation of the three scenarios considered for UAV-mounted RIS performance evaluation. From left to right: (i) RIS positioned at the midpoint between Tx and Rx, (ii) RIS positioned above the Rx, and (iii) RIS positioned off the direct path between Tx and Rx. In all scenarios, the RIS is deployed at a height of 2m.</em>
+</p>
 
 ## RIS Configurations
 
