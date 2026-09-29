@@ -1,4 +1,4 @@
-# LIVE-RIS: The UAV-mounted RIS dataset
+# LIVE-RIS: A Comprehensive In-Flight Dataset for UAV-Mounted RIS Channel Measurements
 
 This repository contains a measurement dataset collected during indoor flight experiments with a **UAV-mounted Reconfigurable Intelligent Surface (RIS)**.
 The dataset comprises EKF-based state estimates of both UAV and RIS, ground-truth measurements, RIS configurations derived via optimization, and the corresponding S21 channel measurements acquired using a vector network analyzer (VNA). In addition, we consider multiple transmitter (Tx), receiver (Rx), and UAV-mounted RIS deployment locations, enabling analysis of divers relative geometries.
@@ -23,14 +23,14 @@ D. Müller, K. Weinberger, A. Sezgin and M. Mönnigmann, "LIVE-RIS: The UAV-moun
 
 ```
 @INPROCEEDINGS{9839223, 
-author={},
-booktitle={},
-title={},
+author={D. M\"uller, K. Weinberger, A. Sezgin, and M. M\"onnigmann},
+booktitle={arXiv},
+title={LIVE-RIS: A Comprehensive In-Flight Dataset for UAV-Mounted RIS Channel Measurements},
 year={2027},
 volume={},  
 number={},
-pages={},
-doi={}}
+pages={1-6},
+doi={doi.org/10.48550/arXiv.2609.34993}}
 ```
 
 This dataset is released for non-commercial research and educational purposes.
